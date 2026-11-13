@@ -1,0 +1,9 @@
+Package: com.example.fcuuidstartuptest
+Name: FCUUID Startup Test
+Version: 0.1.0
+Architecture: iphoneos-arm
+Description: Local FCUUID persistence experiment for an authorized test application
+Maintainer: Test Developer
+Author: Test Developer
+Section: Tweaks
+Depends: mobilesubstrate

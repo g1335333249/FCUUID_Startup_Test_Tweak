@@ -1,0 +1,28 @@
+name: Build iOS tweak
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - name: Check out project
+        uses: actions/checkout@v4
+
+      - name: Install Theos
+        run: |
+          git clone --depth 1 --recursive https://github.com/theos/theos.git "$RUNNER_TEMP/theos"
+          echo "THEOS=$RUNNER_TEMP/theos" >> "$GITHUB_ENV"
+
+      - name: Build tweak
+        run: make clean all
+
+      - name: Upload dynamic library
+        uses: actions/upload-artifact@v4
+        with:
+          name: FCUUIDStartupTest-arm64
+          path: .theos/obj/**/*.dylib
+          if-no-files-found: error
